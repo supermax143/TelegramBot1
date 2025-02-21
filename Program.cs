@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
@@ -42,31 +39,38 @@ class Program
    // Обработка входящих сообщений
    private static async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
    {
-      // Проверяем, что сообщение содержит текст
-      if (update.Type != UpdateType.Message || update.Message.Type != MessageType.Text)
+      
+      if(update.Message == null)
+      {
          return;
-
-      var chatId = update.Message.Chat.Id;
-      var text = update.Message.Text;
-
-      Console.WriteLine($"Получено сообщение: {text} от {update.Message.Chat.Username}");
-
-      // Обработка команды /start
-      if (text == "/start")
-      {
-         await botClient.SendMessage(
-             chatId: chatId,
-             text: "Привет! Я ваш бот. Чем могу помочь?",
-             cancellationToken: cancellationToken
-         );
       }
-      else
+
+      //
+      //Проверяем, что сообщение содержит текст
+      if (update.Type == UpdateType.Message && update.Message.Type == MessageType.Text)
       {
-         await botClient.SendMessage(
-             chatId: chatId,
-             text: "Вы сказали: " + text,
-             cancellationToken: cancellationToken
-         );
+         var chatId = update.Message.Chat.Id;
+         var text = update.Message.Text;
+
+         Console.WriteLine($"Получено сообщение: {text} от {update.Message.Chat.Username}");
+
+         // Обработка команды /start
+         if (text == "/start")
+         {
+            await botClient.SendMessage(
+                chatId: chatId,
+                text: "Привет! Я ваш бот. Чем могу помочь?",
+                cancellationToken: cancellationToken
+            );
+         }
+         else
+         {
+            await botClient.SendMessage(
+                chatId: chatId,
+                text: "Вы сказали: " + text,
+                cancellationToken: cancellationToken
+            );
+         }
       }
    }
 

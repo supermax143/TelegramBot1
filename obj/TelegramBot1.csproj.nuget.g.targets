@@ -4,6 +4,5 @@
     <Import Project="$(NuGetPackageRoot)system.text.json\8.0.5\buildTransitive\net6.0\System.Text.Json.targets" Condition="Exists('$(NuGetPackageRoot)system.text.json\8.0.5\buildTransitive\net6.0\System.Text.Json.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.options\8.0.0\buildTransitive\net6.0\Microsoft.Extensions.Options.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.options\8.0.0\buildTransitive\net6.0\Microsoft.Extensions.Options.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.configuration.binder\8.0.0\buildTransitive\netstandard2.0\Microsoft.Extensions.Configuration.Binder.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.configuration.binder\8.0.0\buildTransitive\netstandard2.0\Microsoft.Extensions.Configuration.Binder.targets')" />
-    <Import Project="$(NuGetPackageRoot)google.cloud.functions.hosting\2.2.1\build\net6.0\Google.Cloud.Functions.Hosting.targets" Condition="Exists('$(NuGetPackageRoot)google.cloud.functions.hosting\2.2.1\build\net6.0\Google.Cloud.Functions.Hosting.targets')" />
   </ImportGroup>
 </Project>
