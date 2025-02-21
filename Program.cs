@@ -32,8 +32,9 @@ class Program
       Console.WriteLine($"Бот {me.Username} запущен и ожидает сообщений...");
 
       // Ожидание завершения работы
-      Console.ReadLine();
-      cts.Cancel();
+      //Console.ReadLine();
+      //cts.Cancel();
+      await Task.Delay(-1);
    }
 
    // Обработка входящих сообщений
