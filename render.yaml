@@ -6,6 +6,8 @@ services:
     plan: free
     region: frankfurt
     envVars:
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:8080
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
       - key: TELEGRAM_BOT_TOKEN
