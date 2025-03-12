@@ -1,3 +1,18 @@
-/bin
-/obj
-/.vs
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+
+# Docker
+.env
+docker-compose*.yml
+Dockerfile*
+
+# Environment files
+*.env
+
+# IDE
+.vscode/
+.idea/

@@ -1,2 +1,8 @@
-bin/
-obj/
+**/.git
+**/.dockerignore
+**/bin
+**/obj
+**/node_modules
+.env
+Dockerfile*
+docker-compose*
