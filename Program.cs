@@ -3,6 +3,8 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 
 var builder = WebApplication.CreateBuilder(args);
+var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 var botToken = builder.Configuration["TelegramBot:Token"];
 
 var botClient = new TelegramBotClient(botToken);
@@ -21,7 +23,7 @@ app.UseEndpoints(endpoints =>
         
         if (update?.Message is {} message)
         {
-            await botClient.SendTextMessageAsync(message.Chat.Id, $"Echo: {message.Text}");
+            await botClient.SendMessage(message.Chat.Id, $"Echo: {message.Text}");
         }
     });
 });
@@ -30,7 +32,7 @@ app.UseEndpoints(endpoints =>
 app.Lifetime.ApplicationStarted.Register(async () => 
 {
     var webhookUrl = $"{builder.Configuration["TelegramBot:WebhookUrl"]}/api/webhook";
-    await botClient.SetWebhookAsync(webhookUrl);
+    await botClient.SetWebhook(webhookUrl);
 });
 app.MapGet("/", () => "Telegram Bot is running!");
 app.Run();
