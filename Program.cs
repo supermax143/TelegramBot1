@@ -3,7 +3,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 
 var builder = WebApplication.CreateBuilder(args);
-var botToken = "7996792416:AAFGNZkdgemeWxqT7_JMVtsJxiIWf3TyQow";
+var botToken = builder.Configuration["TelegramBot:Token"];
 
 var botClient = new TelegramBotClient(botToken);
 builder.Services.AddSingleton(botClient);
@@ -13,7 +13,7 @@ var app = builder.Build();
 app.UseRouting();
 app.UseEndpoints(endpoints => 
 {
-    endpoints.MapPost("https://telegrambot-rx83.onrender.com/api/webhook", async context =>
+    endpoints.MapPost("/api/webhook", async context =>
     {
         using var reader = new StreamReader(context.Request.Body);
         var json = await reader.ReadToEndAsync();
@@ -29,8 +29,8 @@ app.UseEndpoints(endpoints =>
 // Set webhook on startup
 app.Lifetime.ApplicationStarted.Register(async () => 
 {
-    var webhookUrl = $"https://telegrambot-rx83.onrender.com/api/webhook";
+    var webhookUrl = $"{builder.Configuration["TelegramBot:WebhookUrl"]}/api/webhook";
     await botClient.SetWebhookAsync(webhookUrl);
 });
-
+app.MapGet("/", () => "Telegram Bot is running!");
 app.Run();
